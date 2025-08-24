@@ -98,7 +98,7 @@ onMounted(async () => {
             />
           </svg>
           <a
-              href="https://buymeacoffee.com/aptashenko"
+              href="https://buymeacoffee.com/aptashenko/e/450049"
               class="px-4 py-2 rounded-xl bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white font-semibold hover:opacity-90 transition"
           >
             Read more
