@@ -73,7 +73,7 @@ onMounted(async () => {
         <!-- Текст -->
         <p
             class="font-sans text-white/90 text-[15px] leading-relaxed whitespace-pre-line transition duration-500"
-            :class="{ 'blur-sm select-none pointer-events-none': idx !== 0 && !unlocked }"
+            :class="{ 'blur-sm select-none pointer-events-none': idx !== 0 && !history.paid }"
         >
           {{ text }}
         </p>
