@@ -99,6 +99,7 @@ import Review from "@/components/Review.vue";
 import {sendHistory} from "@/api/services.js";
 import {useMainStore} from "@/stores/main-store.js";
 import {useRouter} from "vue-router";
+import Cookies from "js-cookie";
 
 const form = ref({name: "", date: "", country: ""});
 const lottieContainer = ref(null);

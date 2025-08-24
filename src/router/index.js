@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from "@/views/HomePage.vue";
+import Cookies from "js-cookie";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,6 +14,12 @@ const router = createRouter({
       path: '/result/:user_id',
       name: 'result',
       component: () => import('../views/ResultPage.vue'),
+    },
+    {
+      path: '/success',
+      redirect: (to) => {
+        return { name: 'result', params: { user_id: Cookies.get('user_id') } }
+      }
     }
   ],
 })

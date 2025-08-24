@@ -5,7 +5,7 @@ import {uuid} from "@/utils/uuid-generator.js";
 
 export const useMainStore = defineStore('main-store', () => {
   const result = ref(null);
-  const userId = Cookies.get('user_id');
+  const userId = ref(Cookies.get('user_id'));
   const step = ref(['form'])
   const order = [
     "introduction",
@@ -22,6 +22,7 @@ export const useMainStore = defineStore('main-store', () => {
   function setUuid() {
     const id = uuid();
     Cookies.set("user_id", id, { expires: 1 });
+    userId.value = id
     return id
   }
 
