@@ -98,8 +98,9 @@ onMounted(async () => {
             />
           </svg>
           <a
-              :href="`https://buymeacoffee.com/aptashenko/e/450049?support_note=${route.params.user_id}`"
+              href="https://aptashenko.gumroad.com/l/jxcdnq?wanted=true"
               class="px-4 py-2 rounded-xl bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white font-semibold hover:opacity-90 transition"
+              :data-custom-uuid="route.params.user_id"
           >
             Read more
           </a>
