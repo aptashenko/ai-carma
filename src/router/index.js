@@ -17,9 +17,10 @@ const router = createRouter({
     },
     {
       path: '/success',
-      redirect: (to) => {
-        return { name: 'result', params: { user_id: Cookies.get('user_id') } }
-      }
+      component: () => import('../views/SuccessPage.vue')
+      // redirect: (to) => {
+      //   return { name: 'result', params: { user_id: Cookies.get('user_id') } }
+      // }
     }
   ],
 })
