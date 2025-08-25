@@ -98,9 +98,8 @@ onMounted(async () => {
             />
           </svg>
           <a
-              href="https://aptashenko.gumroad.com/l/jxcdnq?wanted=true"
-              class="gumroad-button px-4 py-2 rounded-xl bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white font-semibold hover:opacity-90 transition"
-              :data-custom-uuid="route.params.user_id"
+              :href="`https://aptashenko.gumroad.com/l/jxcdnq?uuid=${route.params.user_id}`"
+              class="px-4 py-2 rounded-xl bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white font-semibold hover:opacity-90 transition"
           >
             Read more
           </a>
