@@ -2,15 +2,18 @@
 import {ref, onMounted, onUnmounted} from "vue";
 import Cookies from "js-cookie";
 import {getUsersHistory} from "@/api/services.js";
+import {useRoute} from "vue-router";
 
 const status = ref("pending");
+const route = useRoute();
 
 let intervalId = null;
-const uuid = Cookies.get("user_id");
+
+const users_uuid = Cookies.get("user_id") || route.params.uuid;
 
 onMounted(() => {
   intervalId = setInterval(async () => {
-    const { paid } = await getUsersHistory(uuid);
+    const { paid } = await getUsersHistory(users_uuid);
     if (paid) {
       status.value = "confirmed";
       clearInterval(intervalId);
@@ -38,7 +41,7 @@ onUnmounted(() => {
         <div v-else-if="status === 'confirmed'" class="mt-4">
           <p class="text-green-300 mb-6">Your payment is confirmed.</p>
           <router-link
-              :to="{name: 'result', params: {user_id: uuid}}"
+              :to="{name: 'result', params: {user_id: users_uuid}}"
               class="inline-block px-6 py-3 rounded-xl bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white font-semibold shadow-lg hover:opacity-90 transition"
           >
             🚀 Go to your lessons
