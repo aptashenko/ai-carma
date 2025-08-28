@@ -125,45 +125,45 @@ const props = defineProps({
 const fallback = [
   {
     id: 1,
-    name: 'Marina K.',
-    location: 'Warsaw',
+    name: 'Jessica L.',
+    location: 'Los Angeles, CA',
     rating: 5,
     date: '2025-08-10',
-    text: 'I received the answer I had been searching for. The message came at the perfect moment — as if I was gently guided toward the right decision.'
+    text: 'Wow… reading this was like a mirror. 💫 I’ve been stuck in the same relationship patterns for YEARS, and suddenly it clicked — it’s my karmic lesson. Feels crazy but also sooo freeing.'
   },
   {
     id: 2,
-    name: 'Sergii P.',
-    location: 'Kyiv',
+    name: 'Michael R.',
+    location: 'Austin, TX',
     rating: 5,
-    date: '2025-08-18',
-    text: 'A very careful and respectful reading. I liked the concrete recommendations — not vague words, but real steps I can apply.'
+    date: '2025-08-14',
+    text: 'Never thought I’d say this, but the “repeating cycles” part hit me hard. 😅 Always chasing the same type of job, same type of stress. Now I see it’s not random — it’s karma pushing me to change.'
   },
   {
     id: 3,
-    name: 'Ava R.',
-    location: 'Paris',
+    name: 'Sophia A.',
+    location: 'New York, NY',
     rating: 5,
-    date: '2025-08-19',
-    text: 'Spot on about my procrastination patterns. After the reading, it became easier to set boundaries and stop draining my energy.'
+    date: '2025-08-18',
+    text: 'My karmic lesson showed up EXACTLY how I feel inside. 🕊️ Procrastination, fear of speaking up… reading it felt like the universe calling me out but with love. 🥹💜'
   },
   {
     id: 4,
-    name: 'Oleh T.',
-    location: 'Lviv',
+    name: 'Daniel K.',
+    location: 'Seattle, WA',
     rating: 4,
     date: '2025-08-21',
-    text: 'I was skeptical at first, but the coincidences with my past experiences and the precise description of my current challenges impressed me.'
+    text: 'I kept seeing 11:11 everywhere this week 🔮 then got this reading… and it literally mentioned karmic debt around trust. Like, okay Universe, I hear you 👀✨.'
   },
   {
     id: 5,
-    name: 'Elena M.',
-    location: 'Berlin',
+    name: 'Emily S.',
+    location: 'Miami, FL',
     rating: 5,
-    date: '2025-08-22',
-    text: 'The result was beautifully presented, leaving me with a sense of clarity and focus. I’ll definitely come back for the extended version.'
+    date: '2025-08-23',
+    text: 'The way it described my lesson about setting boundaries 😭🔥 it’s EXACTLY what I’ve been journaling about. Feels less like “fortune telling” and more like soul reminders.'
   },
-]
+];
 
 const reviews = computed(() => (props.reviews && props.reviews.length ? props.reviews : fallback))
 

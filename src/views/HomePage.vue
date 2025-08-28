@@ -4,6 +4,16 @@
     <div v-if="store.step[store.step.length-1] ===  'form'">
       <form key="form" @submit.prevent="submitForm" class="space-y-5">
         <!-- Name -->
+        <FormField label="Email">
+          <template #icon>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-70"
+                 viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 12c2.761 0 5-2.462 5-5.5S14.761 1 12 1 7 3.462 7 6.5 9.239 12 12 12zm0 2c-4.418 0-8 2.91-8 6.5 0 .828.895 1.5 2 1.5h12c1.105 0 2-.672 2-1.5 0-3.59-3.582-6.5-8-6.5z"/>
+            </svg>
+          </template>
+          <input v-model.trim="form.email" type="email" required class="field-input" placeholder="e.g., example@gmail.com" />
+        </FormField>
+        <!-- Name -->
         <FormField label="Name">
           <template #icon>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-70"
@@ -22,7 +32,15 @@
               <path d="M7 2a1 1 0 1 0 0 2h1v1h8V4h1a1 1 0 1 0 0-2H7zM4 7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v11a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7zm3 3h4v4H7v-4z"/>
             </svg>
           </template>
-          <input v-model="form.date" type="date" required class="field-input" />
+          <input
+              v-model.trim="form.date"
+              type="text"
+              required
+              class="field-input"
+              placeholder="MM/DD/YYYY"
+              pattern="\d{2}/\d{2}/\d{4}"
+              title="Use format: MM/DD/YYYY"
+          />
         </FormField>
 
         <!-- Country -->
@@ -96,12 +114,11 @@ import lottie from "lottie-web";
 import sphereAnim from "@/assets/lottie-animations/sie.json";
 import FormField from "@/components/FormField.vue";
 import Review from "@/components/Review.vue";
-import {sendHistory} from "@/api/services.js";
 import {useMainStore} from "@/stores/main-store.js";
 import {useRouter} from "vue-router";
-import Cookies from "js-cookie";
+import {useAuthStore} from "@/stores/auth-store.js";
 
-const form = ref({name: "", date: "", country: ""});
+const form = ref({name: "", date: "", country: "",email: ""});
 const lottieContainer = ref(null);
 const lottieInstance = ref(null);
 
@@ -117,6 +134,7 @@ const chants = [
 ];
 const chantLine = ref(chants[0]);
 let chantTimer = null;
+const auth = useAuthStore();
 
 const isFormValid = computed(() =>
     form.value.name.trim().length >= 2 &&
@@ -130,15 +148,17 @@ async function submitForm() {
   store.step.push('loading')
   startChantCycle();
 
-  await sendHistory({
-    uuid: store.userId,
+  const payload = {
+    reportUuid: store.userId,
     name: form.value.name,
     date_of_birth: form.value.date,
-    country: form.value.country
-  });
+    country: form.value.country,
+    email: form.value.email,
+  }
+  const report = await auth.register(payload)
 
   stopChantCycle();
-  router.push({name: "result", params: {user_id: store.userId}});
+  router.push({name: "result", params: {report_id: report}});
 
   store.step.push('result')
 }
@@ -189,20 +209,5 @@ onBeforeUnmount(() => {
 
 <style>
 @reference 'tailwindcss';
-/* Анимации переходов */
-.fade-scale-enter-active, .fade-scale-leave-active {
-  transition: all .35s ease;
-}
-
 .field-input { @apply w-full pl-11 pr-3 py-3 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-purple-300/60 focus:outline-none focus:border-fuchsia-400/50 focus:ring-2 focus:ring-fuchsia-400/30 transition; }
-
-.fade-scale-enter-from {
-  opacity: 0;
-  transform: translateY(8px) scale(.98);
-}
-
-.fade-scale-leave-to {
-  opacity: 0;
-  transform: translateY(-6px) scale(.98);
-}
 </style>

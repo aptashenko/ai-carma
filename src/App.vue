@@ -2,8 +2,11 @@
 import { ref } from "vue";
 import Step from "@/components/Step.vue";
 import {useMainStore} from "@/stores/main-store.js";
+import {useAuthStore} from "@/stores/auth-store.js";
 const paymentError = ref(null);
 const store = useMainStore();
+const auth = useAuthStore();
+
 </script>
 
 <template>

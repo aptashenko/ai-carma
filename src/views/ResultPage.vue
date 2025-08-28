@@ -28,9 +28,9 @@ function copyResult() {
 }
 
 onMounted(async () => {
-  if (route.params.user_id){
+  if (route.params.report_id){
     try {
-      history.value = await getUsersHistory(route.params.user_id);
+      history.value = await getUsersHistory(route.params.report_id);
 
       if (history.value?.result) {
         store.order.forEach((key) => {
@@ -98,7 +98,7 @@ onMounted(async () => {
             />
           </svg>
           <a
-              :href="`https://aptashenko.gumroad.com/l/jxcdnq?success_url=${encodeURIComponent(`https://ai-carma.vercel.app/success?uuid=${route.params.user_id}`)}&uuid=${route.params.user_id}`"
+              :href="`https://aptashenko.gumroad.com/l/jxcdnq?success_url=${encodeURIComponent(`https://ai-carma.vercel.app/success?uuid=${route.params.report_id}`)}&uuid=${route.params.user_id}`"
               class="px-4 py-2 rounded-xl bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white font-semibold hover:opacity-90 transition"
           >
             Read more

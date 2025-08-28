@@ -11,7 +11,7 @@ const router = createRouter({
       component: HomePage
     },
     {
-      path: '/result/:user_id',
+      path: '/result/:report_id',
       name: 'result',
       component: () => import('../views/ResultPage.vue'),
     },
