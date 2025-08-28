@@ -35,7 +35,7 @@ export const useAuthStore = defineStore('auth', () => {
                 name,
                 date_of_birth,
                 country,
-            }, {withCredentials: true})
+            })
 
             user.value = data.user || null
             if (user.value && user.value.id) setUserCookie(user.value.id)
@@ -62,7 +62,7 @@ export const useAuthStore = defineStore('auth', () => {
         loading.value = true
         error.value = null
         try {
-            const { data } = await instance.post(CARMA_ROUTES.LOGIN, { email }, {withCredentials: true})
+            const { data } = await instance.post(CARMA_ROUTES.LOGIN, { email })
             user.value = data.user || null
             if (user.value && user.value.id) setUserCookie(user.value.id)
             reports.value = Array.isArray(data.reports) ? data.reports : [];
