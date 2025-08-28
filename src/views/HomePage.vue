@@ -117,6 +117,7 @@ import Review from "@/components/Review.vue";
 import {useMainStore} from "@/stores/main-store.js";
 import {useRouter} from "vue-router";
 import {useAuthStore} from "@/stores/auth-store.js";
+import {uuid} from "@/utils/uuid-generator.js";
 
 const form = ref({name: "", date: "", country: "",email: ""});
 const lottieContainer = ref(null);
@@ -155,6 +156,7 @@ async function submitForm() {
     country: form.value.country,
     email: form.value.email,
   }
+
   const report = await auth.register(payload)
 
   stopChantCycle();
