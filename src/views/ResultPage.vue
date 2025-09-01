@@ -43,6 +43,15 @@ onMounted(async () => {
     }
   }
 });
+
+function trackReadMoreClick(sectionKey) {
+  if (window.gtag) {
+    window.gtag('event', 'read_more_click', {
+      section: sectionKey,
+      report_id: route.params.report_id,
+    });
+  }
+}
 </script>
 
 <template>
@@ -100,6 +109,7 @@ onMounted(async () => {
           <a
               :href="`https://aptashenko.gumroad.com/l/jxcdnq?uuid=${route.params.report_id}`"
               class="px-4 py-2 rounded-xl bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white font-semibold hover:opacity-90 transition"
+              @click="trackReadMoreClick('introduction')"
           >
             Read more
           </a>
