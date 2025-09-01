@@ -20,13 +20,6 @@ const titles = {
   conclusion: "🌟 Conclusion",
 };
 
-function copyResult() {
-  const fullText = store.order
-      .map((key) => `${titles[key]}\n${store.orderedResult[key] || ""}`)
-      .join("\n\n");
-  navigator.clipboard?.writeText(fullText);
-}
-
 onMounted(async () => {
   if (route.params.report_id){
     try {
@@ -44,13 +37,17 @@ onMounted(async () => {
   }
 });
 
-function trackReadMoreClick(sectionKey) {
+function onReadMoreClick(section) {
   if (window.gtag) {
     window.gtag('event', 'read_more_click', {
-      section: sectionKey,
+      section,
       report_id: route.params.report_id,
     });
   }
+
+  setTimeout(() => {
+    window.location.href = `https://aptashenko.gumroad.com/l/jxcdnq?uuid=${route.params.report_id}`;
+  }, 150);
 }
 </script>
 
@@ -106,26 +103,16 @@ function trackReadMoreClick(sectionKey) {
                 d="M12 11c.828 0 1.5.672 1.5 1.5v4.5a1.5 1.5 0 01-3 0v-4.5c0-.828.672-1.5 1.5-1.5zM6 11V7a6 6 0 1112 0v4h1a2 2 0 012 2v7a2 2 0 01-2 2H5a2 2 0 01-2-2v-7a2 2 0 012-2h1z"
             />
           </svg>
-          <a
-              :href="`https://aptashenko.gumroad.com/l/jxcdnq?uuid=${route.params.report_id}`"
+          <button
               class="px-4 py-2 rounded-xl bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white font-semibold hover:opacity-90 transition"
-              @click="trackReadMoreClick('introduction')"
+              @click="onReadMoreClick('introduction')"
           >
             Read more
-          </a>
+          </button>
         </div>
       </div>
     </div>
 
-    <!-- Кнопки -->
-    <div class="flex flex-col sm:flex-row gap-3">
-      <button
-          @click="copyResult"
-          class="flex-1 py-3 rounded-2xl bg-gradient-to-r from-sky-600 to-cyan-600 hover:from-sky-500 hover:to-cyan-500 transition font-semibold"
-      >
-        Copy All Text
-      </button>
-    </div>
   </div>
 </template>
 
