@@ -115,14 +115,12 @@ onUnmounted(() => {
                 </p>
               </div>
               <span
-                  v-if="!report.paid"
                   class="font-bold text-[#fff] p-2 rounded-xl"
               >
-                Unpaid
+                {{ !report.paid ? 'Unpaid' : 'Paid' }}
               </span>
               <router-link
-                  v-else
-                  :to="{name: 'result', params: {report_id: report.id}}"
+                  :to="{name: 'result', params: {report_id: report.reportUuid}}"
                   class="font-bold text-[#fff] bg-green-600 p-2 rounded-xl"
               >
                 Open lesson
@@ -137,6 +135,7 @@ onUnmounted(() => {
         </div>
       </div>
       <a
+          href="https://t.me/ptash_enko"
           class="font-bold  block w-fit mx-auto my-10 cursor-pointer text-[#fff] bg-green-600 p-2 rounded-xl"
       >
         Chat with support

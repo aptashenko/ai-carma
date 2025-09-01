@@ -4,17 +4,17 @@
     <div v-if="store.step[store.step.length-1] ===  'form'">
       <form key="form" @submit.prevent="submitForm" class="space-y-5">
         <!-- Name -->
-        <FormField label="Email">
+        <FormField label="Email*">
           <template #icon>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-70"
-                 viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 12c2.761 0 5-2.462 5-5.5S14.761 1 12 1 7 3.462 7 6.5 9.239 12 12 12zm0 2c-4.418 0-8 2.91-8 6.5 0 .828.895 1.5 2 1.5h12c1.105 0 2-.672 2-1.5 0-3.59-3.582-6.5-8-6.5z"/>
+            <svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none" class="w-5 h-5 opacity-70">
+              <path d="M4 7.00005L10.2 11.65C11.2667 12.45 12.7333 12.45 13.8 11.65L20 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             </svg>
           </template>
           <input v-model.trim="form.email" type="email" required class="field-input" placeholder="e.g., example@gmail.com" />
         </FormField>
         <!-- Name -->
-        <FormField label="Name">
+        <FormField label="Name*">
           <template #icon>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-70"
                  viewBox="0 0 24 24" fill="currentColor">
@@ -25,7 +25,7 @@
         </FormField>
 
         <!-- Birthdate -->
-        <FormField label="Birthdate">
+        <FormField label="Birthdate*">
           <template #icon>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-70"
                  viewBox="0 0 24 24" fill="currentColor">
@@ -44,7 +44,7 @@
         </FormField>
 
         <!-- Country -->
-        <FormField label="Country you were born in">
+        <FormField label="Country you were born in*">
           <template #icon>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-70"
                  viewBox="0 0 24 24" fill="currentColor">
