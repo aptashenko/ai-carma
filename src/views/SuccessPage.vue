@@ -32,12 +32,12 @@ const startPolling = () => {
 };
 
 const handleLogin = async () => {
+  status.value = "pending"
   try {
     const res = await auth.login(email.value);
     if (res.ok) {
       Cookies.set("email", res.user.email);
       Cookies.set("user_id", res.user.id);
-      status.value = "pending";
       startPolling();
     }
   } catch (e) {
