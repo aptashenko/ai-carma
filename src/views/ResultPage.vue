@@ -3,6 +3,7 @@ import {onMounted, ref} from "vue";
 import { useMainStore } from "@/stores/main-store.js";
 import {getUsersHistory} from "@/api/services.js";
 import {useRoute, useRouter} from "vue-router";
+import LoaderOverlay from "@/components/LoaderOverlay.vue";
 
 const store = useMainStore();
 const route = useRoute()
@@ -19,23 +20,27 @@ const titles = {
   spiritual_practice: "🕉 Spiritual Practice",
   conclusion: "🌟 Conclusion",
 };
-
+const loading = ref(false);
 store.step.push('result');
+
+const getReportInfo = async (id) => {
+  try {
+    history.value = await getUsersHistory(id);
+
+    if (history.value?.result) {
+      store.order.forEach((key) => {
+        store.orderedResult[key] = history.value?.result[key] || "";
+      });
+    }
+  } catch (error) {
+    console.error(error)
+    router.push({name: 'home'})
+  }
+}
 
 onMounted(async () => {
   if (route.params.report_id){
-    try {
-      history.value = await getUsersHistory(route.params.report_id);
-
-      if (history.value?.result) {
-        store.order.forEach((key) => {
-          store.orderedResult[key] = history.value?.result[key] || "";
-        });
-      }
-    } catch (error) {
-      console.error(error)
-      router.push({name: 'home'})
-    }
+    getReportInfo(route.params.report_id)
   }
 });
 
@@ -51,6 +56,25 @@ function onReadMoreClick(section) {
     window.location.href = `https://aptashenko.gumroad.com/l/jxcdnq?uuid=${route.params.report_id}`;
   }, 150);
 }
+
+const loadPaymentInfo = async () => {
+  if (loading.value) {
+    return
+  }
+  loading.value = true;
+  try {
+    await new Promise(resolve => {
+      setTimeout(() => {
+        resolve()
+      }, 2000)
+    })
+    await getReportInfo(route.params.report_id);
+  } catch (error) {
+    console.error(error)
+  } finally {
+    loading.value = false;
+  }
+}
 </script>
 
 <template>
@@ -65,9 +89,26 @@ function onReadMoreClick(section) {
       </h2>
     </div>
 
+    <div v-if="!history.paid" class="flex flex-col">
+      <button
+          class="px-4 py-2 mx-auto w-[250px] block rounded-xl bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white font-semibold hover:opacity-90 transition"
+          :disabled="loading"
+          @click="loadPaymentInfo"
+      >
+        ⚠️ Check payment status
+      </button>
+      <a
+          href="https://t.me/ptash_enko"
+          target="_blank"
+          class="font-bold w-[250px] mt-4 block text-center mx-auto cursor-pointer text-[#fff] bg-green-600 p-2 rounded-xl"
+      >
+        💬 Need help?
+      </a>
+    </div>
+
     <!-- Контент -->
     <div
-        class="bg-black/50 px-5 py-6 min-h-[60dvh] rounded-xl overflow-y-auto space-y-6"
+        class="relative bg-black/50 px-5 py-6 min-h-[60dvh] rounded-xl overflow-y-auto space-y-6"
     >
       <div
           v-for="(text, key, idx) in store.orderedResult"
@@ -113,6 +154,7 @@ function onReadMoreClick(section) {
           </button>
         </div>
       </div>
+      <loader-overlay v-show="loading" />
     </div>
 
   </div>

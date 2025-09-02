@@ -136,9 +136,10 @@ onUnmounted(() => {
       </div>
       <a
           href="https://t.me/ptash_enko"
+          target="_blank"
           class="font-bold  block w-fit mx-auto my-10 cursor-pointer text-[#fff] bg-green-600 p-2 rounded-xl"
       >
-        Chat with support
+        💬 Need help?
       </a>
     </div>
   </div>
