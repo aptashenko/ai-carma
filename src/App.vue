@@ -3,10 +3,11 @@ import { ref } from "vue";
 import Step from "@/components/Step.vue";
 import {useMainStore} from "@/stores/main-store.js";
 import {useAuthStore} from "@/stores/auth-store.js";
+import {useRoute} from "vue-router";
 const paymentError = ref(null);
 const store = useMainStore();
 const auth = useAuthStore();
-
+const route = useRoute();
 </script>
 
 <template>
@@ -53,7 +54,7 @@ const auth = useAuthStore();
           </div>
 
           <!-- Степпер -->
-          <div class="mb-8">
+          <div v-if="route.path !== '/success'" class="mb-8">
             <div class="flex items-center gap-3">
               <Step :active="store.step.includes('form')" label="Your data" />
               <div

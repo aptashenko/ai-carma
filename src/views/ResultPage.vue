@@ -20,6 +20,8 @@ const titles = {
   conclusion: "🌟 Conclusion",
 };
 
+store.step.push('result');
+
 onMounted(async () => {
   if (route.params.report_id){
     try {

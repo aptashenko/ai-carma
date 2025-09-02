@@ -57,12 +57,12 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="relative z-10 flex items-center justify-center py-12 px-4">
+  <div class="relative z-10 flex items-center justify-center pb-12 md:px-4">
     <div
         class="w-full max-w-xl rounded-3xl p-[1.5px] bg-gradient-to-r from-fuchsia-500/60 via-indigo-500/60 to-violet-500/60 animate-border"
     >
       <div
-          class="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 shadow-2xl text-center"
+          class="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 py-8 px-4 md:p-8 shadow-2xl text-center"
       >
         <h1
             class="text-3xl md:text-4xl font-semibold tracking-wide text-[#fff] mb-4"
@@ -104,24 +104,24 @@ onUnmounted(() => {
             <li
                 v-for="(report, idx) in auth.reports"
                 :key="report.id"
-                class="p-4 rounded-xl bg-white/10 text-white flex justify-between items-center"
+                class="p-2 md:p-4 rounded-xl bg-white/10 text-white flex justify-between items-center flex-col md:flex-row"
             >
-              <div>
+              <div class="text-center">
                 <p class="font-semibold">
                   Lesson {{ auth.reports.length - idx }}
                 </p>
-                <p class="text-sm text-gray-300">
+                <p class="text-sm text-gray-300 text-xs md:text-sm">
                   Created: {{ new Date(report.created_at).toLocaleString() }}
                 </p>
               </div>
               <span
-                  class="font-bold text-[#fff] p-2 rounded-xl"
+                  class="font-bold text-[#fff] p-2 rounded-xl text-xs md:text-sm"
               >
                 {{ !report.paid ? 'Unpaid' : 'Paid' }}
               </span>
               <router-link
                   :to="{name: 'result', params: {report_id: report.reportUuid}}"
-                  class="font-bold text-[#fff] bg-green-600 p-2 rounded-xl"
+                  class="font-bold text-[#fff] bg-green-600 text-center p-2 rounded-xl text-xs md:text-sm"
               >
                 Open lesson
               </router-link>
