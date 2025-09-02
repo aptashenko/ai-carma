@@ -36,10 +36,9 @@
               v-model.trim="form.date"
               type="text"
               required
+              v-mask="'##/##/####'"
               class="field-input"
               placeholder="MM/DD/YYYY"
-              pattern="\d{2}/\d{2}/\d{4}"
-              title="Use format: MM/DD/YYYY"
           />
         </FormField>
 
