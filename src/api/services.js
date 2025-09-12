@@ -21,7 +21,7 @@ export const checkPayment = async (id) => {
 
 export const getUsersHistory = async (id) => {
     try {
-        const {data} = await instance.get(CARMA_ROUTES.GET_USERS_RESULT.replace(':id', id));
+        const {data} = await instance.get(CARMA_ROUTES.GET_REPORT.replace(':id', id));
         return data;
     } catch (error) {
         console.log(error);

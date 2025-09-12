@@ -184,10 +184,9 @@ async function submitForm() {
   startChantCycle();
 
   const payload = {
-    reportUuid: store.userId,
     name: form.value.name,
-    date_of_birth: form.value.date,
-    country: form.value.country,
+    birthday: form.value.date,
+    city: form.value.country,
     email: form.value.email,
   };
 

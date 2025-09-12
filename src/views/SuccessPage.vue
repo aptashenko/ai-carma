@@ -17,11 +17,12 @@ if (!sessionEmail || !sessionId.value) {
   status.value = "login";
 }
 
-const startPolling = () => {
+const handleLogin = async () => {
+  status.value = "pending"
   intervalId = setInterval(async () => {
     try {
-      const res = await auth.fetchMe(sessionId.value);
-      if (res.ok) {
+      const res = await auth.login(email.value);
+      if (res) {
         status.value = "confirmed";
       }
     } catch (e) {
@@ -31,23 +32,9 @@ const startPolling = () => {
   }, 3000);
 };
 
-const handleLogin = async () => {
-  status.value = "pending"
-  try {
-    const res = await auth.login(email.value);
-    if (res.ok) {
-      Cookies.set("email", res.user.email);
-      Cookies.set("user_id", res.user.id);
-      startPolling();
-    }
-  } catch (e) {
-    status.value = "error";
-  }
-};
-
 onMounted(() => {
   if (status.value === "pending") {
-    startPolling();
+    handleLogin();
   }
 });
 
@@ -120,7 +107,7 @@ onUnmounted(() => {
                 {{ !report.paid ? 'Unpaid' : 'Paid' }}
               </span>
               <router-link
-                  :to="{name: 'result', params: {report_id: report.reportUuid}}"
+                  :to="{name: 'result', params: {report_id: report.reportuuid}}"
                   class="font-bold text-[#fff] bg-green-600 text-center p-2 rounded-xl text-xs md:text-sm"
               >
                 Open lesson

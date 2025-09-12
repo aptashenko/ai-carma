@@ -25,28 +25,18 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     // actions
-    async function register({ email, reportUuid, name, date_of_birth, country }) {
+    async function register({ email, name, birthday, city }) {
         loading.value = true
         error.value = null
         try {
             const { data } = await instance.post(CARMA_ROUTES.REGISTER, {
                 email,
-                reportUuid,
                 name,
-                date_of_birth,
-                country,
+                birthday,
+                city,
             })
 
-            user.value = data.user || null
-            if (user.value && user.value.id) setUserCookie(user.value.id)
-
-            if (Array.isArray(data.reports)) {
-                reports.value = data.reports
-            } else if (data.report) {
-                reports.value = [data.report, ...reports.value]
-            }
-
-            return data.report.reportUuid
+            return data.reportUuid
         } catch (e) {
             error.value =
                 (e && e.response && e.response.data && e.response.data.message) ||
@@ -63,9 +53,7 @@ export const useAuthStore = defineStore('auth', () => {
         error.value = null
         try {
             const { data } = await instance.post(CARMA_ROUTES.LOGIN, { email })
-            user.value = data.user || null
-            if (user.value && user.value.id) setUserCookie(user.value.id)
-            reports.value = Array.isArray(data.reports) ? data.reports : [];
+            reports.value = data || null
             return data
         } catch (e) {
             error.value =
